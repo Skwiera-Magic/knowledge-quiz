@@ -21,8 +21,8 @@ quizBox.addEventListener("click", function (quizStart) {
     if (element.matches("#start")) {
         //changing classes so that start screen hides and questions show up
         startScreen.setAttribute("class", "hide")
-        questionsScreen.setAttribute("class", "start")
-
+        questionsScreen.setAttribute("class", "start")       
+        timer();
     }
 })
 
@@ -52,7 +52,7 @@ function renderQuestion() {
 renderQuestion();
 
 // function checking if correct answer was chosen
-let correctAudio = new Audio("./sfx")
+//let correctAudio = new Audio("./sfx")
 correctChoice = questions[questionNumber].correctAnswer
 function answerChecker(event) {
     let selectedAnswer = event.target.getAttribute("data-index")
@@ -72,4 +72,16 @@ function answerChecker(event) {
     else {
         renderQuestion();
     }
+}
+// function that sets up timer after quiz starts
+let timerEl = document.getElementById('time')
+function timer() {
+    var timeLeft = 120;
+    let timeInterval = setInterval(function () {
+        timeLeft--;
+    timerEl.textContent = timeLeft
+        if(timeLeft === 0) {
+            clearInterval(timeInterval);
+        }
+    }, 1000)
 }
