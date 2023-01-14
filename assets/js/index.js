@@ -77,7 +77,6 @@ function answerChecker(event) {
     return selectedAnswer, correctChoice
 }
 // function that sets up timer after quiz starts
-var timeLeft = ""
 let timerEl = document.getElementById('time')
 function timer() {
     var timeLeft = 120;
@@ -98,7 +97,7 @@ function timer() {
 }
 
 let finalScore = document.getElementById("final-score")
-finalScore.textContent = "10"
+finalScore.textContent = "15"
 
 let initials = document.getElementById("initials")
 let submit = document.getElementById("submit")
@@ -108,8 +107,7 @@ submit.addEventListener("click", function() {
     feedback.setAttribute("class", "start")
     feedback.textContent = "Thank you for taking the quiz, check highscores to know how you placed"
     localStorage.setItem("initials", initials.value)
-    localStorage.setItem("final-score", finalScore.value)
+    localStorage.setItem("final-score", finalScore.textContent)
+    log(finalScore.textContent)
 })
 
-
-let highscores
