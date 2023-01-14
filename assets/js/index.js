@@ -21,7 +21,7 @@ quizBox.addEventListener("click", function (quizStart) {
     if (element.matches("#start")) {
         //changing classes so that start screen hides and questions show up
         startScreen.setAttribute("class", "hide")
-        questionsScreen.setAttribute("class", "start")       
+        questionsScreen.setAttribute("class", "start")
         timer();
     }
 })
@@ -49,10 +49,12 @@ function renderQuestion() {
     questionNumber++;
 }
 
-renderQuestion();
+renderQuestion(); 
 
 // function checking if correct answer was chosen
-//let correctAudio = new Audio("./sfx")
+// TODO: let correctAudio = new Audio("./sfx")
+var selectedAnswer = ""
+var correctChoice = ""
 correctChoice = questions[questionNumber].correctAnswer
 function answerChecker(event) {
     let selectedAnswer = event.target.getAttribute("data-index")
@@ -61,7 +63,7 @@ function answerChecker(event) {
         log(selectedAnswer, correctChoice)
         log("correct")
     }
-    else { 
+    else {
         log(selectedAnswer, correctChoice)
         log("incorrect")
     }
@@ -72,16 +74,42 @@ function answerChecker(event) {
     else {
         renderQuestion();
     }
+    return selectedAnswer, correctChoice
 }
 // function that sets up timer after quiz starts
+var timeLeft = ""
 let timerEl = document.getElementById('time')
 function timer() {
     var timeLeft = 120;
     let timeInterval = setInterval(function () {
-        timeLeft--;
-    timerEl.textContent = timeLeft
-        if(timeLeft === 0) {
+        timerEl.textContent = timeLeft + " seconds"
+        if (timeLeft >= 1) {
+            timeLeft--;
+        }
+        else if (timeLeft === 0) {
             clearInterval(timeInterval);
+            timerEl.textContent = "Out of time"
+        }
+        // TODO: stop timer after all questions answered
+        else if (questionNumber >= questions.length) {
+            clearInterval(timer.timeInterval)
         }
     }, 1000)
 }
+
+let finalScore = document.getElementById("final-score")
+finalScore.textContent = "10"
+
+let initials = document.getElementById("initials")
+let submit = document.getElementById("submit")
+let feedback = document.getElementById("feedback")
+submit.addEventListener("click", function() {
+    endScreen.setAttribute("class", "hide")
+    feedback.setAttribute("class", "start")
+    feedback.textContent = "Thank you for taking the quiz, check highscores to know how you placed"
+    localStorage.setItem("initials", initials.value)
+    localStorage.setItem("final-score", finalScore.value)
+})
+
+
+let highscores
