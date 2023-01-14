@@ -25,13 +25,14 @@ quizBox.addEventListener("click", function (quizStart) {
 
     }
 })
+
+//function that goes through 'questions' array and prints out question and answers
 function renderQuestion() {
     questionTitle.innerHTML = ""
     answers.innerHTML = ""
     questionTitle.textContent = questions[questionNumber].question
 
     let createChoicesList = document.createElement("ol")
-    //log(createChoicesList)
 
     answers.appendChild(createChoicesList)
 
@@ -41,28 +42,27 @@ function renderQuestion() {
         listItem.setAttribute("class", "button")
         createChoicesList.appendChild(listItem)
         listItem.setAttribute("data-index", `${index}`)
-        //log(answer)
     })
 
-
-    //log(questions[questionNumber].answers)
-    //log(questions[questionNumber].question)
-    //log(questionNumber)
 
     answers.addEventListener("click", answerChecker)
     questionNumber++;
 }
+
 renderQuestion();
-var correctAnswer = ""
+
+// function checking if correct answer was chosen
+let correctAudio = new Audio("./sfx")
+correctChoice = questions[questionNumber].correctAnswer
 function answerChecker(event) {
     let selectedAnswer = event.target.getAttribute("data-index")
-    log(selectedAnswer)
-    correctAnswer = questions[questionNumber].correctAnswer
-    log(correctAnswer)
-    if (selectedAnswer === correctAnswer) {
+    // 
+    if (selectedAnswer == correctChoice) {
+        log(selectedAnswer, correctChoice)
         log("correct")
     }
-    else if (selectedAnswer !== correctAnswer) {
+    else { 
+        log(selectedAnswer, correctChoice)
         log("incorrect")
     }
     if (questionNumber == questions.length) {
@@ -72,16 +72,4 @@ function answerChecker(event) {
     else {
         renderQuestion();
     }
-    //log(questionNumber)
-    //log(event.target.getAttribute("data-index"))
 }
-
-
-
-// questionTitle.addEventListener("click", function (nextQuestion) {
-//     let answerSelected = nextQuestion.target;
-//     if (answerSelected.matches("#question-title"))
-//         questionsScreen.setAttribute("class", "hide")
-//     endScreen.setAttribute("class", "start")
-//     log(questionNumber)
-// })  
