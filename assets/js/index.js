@@ -84,17 +84,19 @@ function timer() {
         timerEl.textContent = timeLeft + " seconds"
         if (timeLeft >= 1) {
             timeLeft--;
+            log(endScreen.getAttribute("class"))
         }
         else if (timeLeft === 0) {
             clearInterval(timeInterval);
             timerEl.textContent = "Out of time"
         }
-        // TODO: stop timer after all questions answered
-        else if (questionNumber >= questions.length) {
-            clearInterval(timer.timeInterval)
+        if (endScreen.getAttribute("class") === "start") {
+            clearInterval(timeInterval)
         }
+
     }, 1000)
 }
+log(endScreen.getAttribute("class"))
 
 let finalScore = document.getElementById("final-score")
 finalScore.textContent = "15"
@@ -108,6 +110,5 @@ submit.addEventListener("click", function() {
     feedback.textContent = "Thank you for taking the quiz, check highscores to know how you placed"
     localStorage.setItem("initials", initials.value)
     localStorage.setItem("final-score", finalScore.textContent)
-    log(finalScore.textContent)
 })
 

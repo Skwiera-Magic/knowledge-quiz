@@ -1,7 +1,7 @@
 let log = console.log.bind(document)
 let highscores = document.getElementById("highscores")
 
-
+//function to render highscores 
 function renderList() {
 
     highscores.innerHTML = ""
@@ -12,3 +12,10 @@ function renderList() {
 }
 
 renderList();
+
+// function to clear highscores after clicking 'clear highscores'
+let clearHighscores = document.getElementById("clear")
+clearHighscores.addEventListener("click", function() {
+    localStorage.clear()
+    renderList();
+})
