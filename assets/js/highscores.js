@@ -3,14 +3,11 @@ let highscores = document.getElementById("highscores")
 
 //function to render highscores 
 function renderList() {
-
     highscores.innerHTML = ""
     let renderHighscore = document.createElement("li")
     highscores.appendChild(renderHighscore)
-    renderHighscore.textContent = localStorage.getItem("initials") + ": " + localStorage.getItem("final-score")
-   
+    renderHighscore.textContent = localStorage.getItem("initials") + ": " + localStorage.getItem("final-score")  
 }
-
 renderList();
 
 // function to clear highscores after clicking 'clear highscores'

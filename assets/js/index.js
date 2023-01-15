@@ -52,7 +52,8 @@ function renderQuestion() {
 renderQuestion(); 
 
 // function checking if correct answer was chosen
-// TODO: let correctAudio = new Audio("./sfx")
+let correctAudio = document.getElementById("correct-audio")
+let incorrectAudio = document.getElementById("incorrect-audio")
 var selectedAnswer = ""
 var correctChoice = ""
 correctChoice = questions[questionNumber].correctAnswer
@@ -60,10 +61,12 @@ function answerChecker(event) {
     let selectedAnswer = event.target.getAttribute("data-index")
     // 
     if (selectedAnswer == correctChoice) {
+        // todo: correctAudio.play();
         log(selectedAnswer, correctChoice)
         log("correct")
     }
     else {
+        // todo: incorrectAudio.play();
         log(selectedAnswer, correctChoice)
         log("incorrect")
     }
@@ -78,13 +81,14 @@ function answerChecker(event) {
 }
 // function that sets up timer after quiz starts
 let timerEl = document.getElementById('time')
+var score = ""
 function timer() {
-    var timeLeft = 120;
+    var timeLeft = 90;
     let timeInterval = setInterval(function () {
-        timerEl.textContent = timeLeft + " seconds"
+        // function that makes timer change 
+        timerEl.textContent = (timeLeft -1) + " seconds"
         if (timeLeft >= 1) {
             timeLeft--;
-            log(endScreen.getAttribute("class"))
         }
         else if (timeLeft === 0) {
             clearInterval(timeInterval);
@@ -92,15 +96,21 @@ function timer() {
         }
         if (endScreen.getAttribute("class") === "start") {
             clearInterval(timeInterval)
+            score = timeLeft
+            return score, renderEndScreen()
         }
-
+// todo: set up penalty for wrong answer
     }, 1000)
 }
-log(endScreen.getAttribute("class"))
+//todo: make final score show as timeleft
 
+function renderEndScreen() {    
 let finalScore = document.getElementById("final-score")
-finalScore.textContent = "15"
+finalScore.textContent = score
+}
 
+
+// function to render end screen after submitting the score
 let initials = document.getElementById("initials")
 let submit = document.getElementById("submit")
 let feedback = document.getElementById("feedback")
@@ -109,6 +119,6 @@ submit.addEventListener("click", function() {
     feedback.setAttribute("class", "start")
     feedback.textContent = "Thank you for taking the quiz, check highscores to know how you placed"
     localStorage.setItem("initials", initials.value)
-    localStorage.setItem("final-score", finalScore.textContent)
+    localStorage.setItem("final-score", score)
 })
 
