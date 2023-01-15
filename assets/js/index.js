@@ -49,7 +49,7 @@ function renderQuestion() {
     questionNumber++;
 }
 
-renderQuestion(); 
+renderQuestion();
 
 // function checking if correct answer was chosen
 let correctAudio = document.getElementById("correct-audio")
@@ -62,13 +62,10 @@ function answerChecker(event) {
     // 
     if (selectedAnswer == correctChoice) {
         // todo: correctAudio.play();
-        log(selectedAnswer, correctChoice)
-        log("correct")
     }
     else {
         // todo: incorrectAudio.play();
-        log(selectedAnswer, correctChoice)
-        log("incorrect")
+        penalty();
     }
     if (questionNumber == questions.length) {
         questionsScreen.setAttribute("class", "hide")
@@ -80,45 +77,69 @@ function answerChecker(event) {
     return selectedAnswer, correctChoice
 }
 // function that sets up timer after quiz starts
-let timerEl = document.getElementById('time')
+var timerEl = document.getElementById('time')
 var score = ""
+var timeLeft = ""
 function timer() {
-    var timeLeft = 90;
+    var timeLeft = 30;
     let timeInterval = setInterval(function () {
         // function that makes timer change 
-        timerEl.textContent = (timeLeft -1) + " seconds"
-        if (timeLeft >= 1) {
+        if (timeLeft >= 0) {
             timeLeft--;
         }
         else if (timeLeft === 0) {
             clearInterval(timeInterval);
             timerEl.textContent = "Out of time"
+            score = 0
+            return score, renderEndScreen()
         }
         if (endScreen.getAttribute("class") === "start") {
             clearInterval(timeInterval)
             score = timeLeft
             return score, renderEndScreen()
         }
-// todo: set up penalty for wrong answer
+timerEl.textContent = timeLeft + " seconds"
+        // todo: set up penalty for wrong answer
     }, 1000)
-}
-//todo: make final score show as timeleft
-
-function renderEndScreen() {    
-let finalScore = document.getElementById("final-score")
-finalScore.textContent = score
+    return timeLeft
 }
 
+function penalty() {
+    timeLeft--;
+    timeLeft--;
+    timeLeft--;
+    timeLeft--;
+    timeLeft--;
+    timeLeft--;
+    timeLeft--;
+    timeLeft--;
+    timeLeft--;
+    timeLeft--;
+    log("penalty added")
+}
 
+// function that shows time left as final score
+function renderEndScreen() {
+    let finalScore = document.getElementById("final-score")
+    finalScore.textContent = score + 1
+}
+
+// todo: make it work on pressing enter button
 // function to render end screen after submitting the score
 let initials = document.getElementById("initials")
 let submit = document.getElementById("submit")
 let feedback = document.getElementById("feedback")
-submit.addEventListener("click", function() {
+submit.addEventListener("click", function () {
     endScreen.setAttribute("class", "hide")
     feedback.setAttribute("class", "start")
     feedback.textContent = "Thank you for taking the quiz, check highscores to know how you placed"
     localStorage.setItem("initials", initials.value)
     localStorage.setItem("final-score", score)
 })
+
+initials.addEventListener("keypress", function (event) {
+    if (event.key === "Enter") {
+        submit.click();
+    }
+});
 

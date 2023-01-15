@@ -1,6 +1,7 @@
 let log = console.log.bind(document)
 let highscores = document.getElementById("highscores")
 
+// todo: 
 //function to render highscores 
 function renderList() {
     highscores.innerHTML = ""
