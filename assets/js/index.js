@@ -9,11 +9,40 @@ let questionTitle = document.getElementById("question-title")
 
 // variables
 var questionNumber = 0;
+// todo: it's not working if I change correctAnswer to anything different
 let questions = [
-    { question: "who", answers: ["1a", "2a", "3a", "4a"], correctAnswer: 2 },
-    { question: "why", answers: ["1b", "2b", "3b", "4b"], correctAnswer: 2 },
-    { question: "where", answers: ["1c", "2c", "3c", "4c"], correctAnswer: 2 },
-    { question: "when", answers: ["1d", "2d", "3d", "4d"], correctAnswer: 2 },
+    {
+        question: "If your PC is very hot and starts producing smoke, what do you do?",
+        answers: ["Keep working, but try to complete task as soon as possible",
+            "Get closest jug of water and pour it on the PC",
+            "Save your progress, turn off and unplug the PC",
+            "Open your window and try to blow the smoke away"],
+        correctAnswer: 2
+    },
+    {
+        question: "If there's something wrong with your car on the way to work, what do you do?",
+        answers: ["Leave your car there and run to work, your boss will not tolerate another lateness",
+            "Try to exit and enter the car, it's first thing you do with everything",
+            "Get to the side of the road, turn on emergency lights, repair fault/call help",
+            "Keep going, you can get new car but only if you have a job"],
+        correctAnswer: 2
+    },
+    {
+        question: "If your lightsaber was just chopped in half by industrial blade and there's couple droids running after you, what do you do?",
+        answers: ["Raise your hands and fake surrender, try to mesmerize your enemies", 
+            "Start crying as it was your favourite lightsaber, last gift from your master", 
+            "Use the force to fling one of the droids at rest of them and run away, blend into closes crowd", 
+            "When looking at pieces of your weapon trip on some rubble, fall down and end up just the same as lightsaber"],
+        correctAnswer: 2
+    },
+    {
+        question: "If your nephew who lives in a storage under stairs receives a letter from exclusive boarding school, delivered by an owl what do you do?",
+        answers: ["Give the letter to your nephew, it has his name on the front",
+            "Secretly organize party where you can tell him about letter",
+            "Throw letter away, deny it's existence and promise to yourself that you'll do the same if next will come",
+            "Help your nephew pack his things and wish him good luck"],
+        correctAnswer: 2
+    },
 ];
 // event listener checking if 'start' button was clicked
 quizBox.addEventListener("click", function (quizStart) {
@@ -81,16 +110,16 @@ var timerEl = document.getElementById('time')
 var score = ""
 var timeLeft = ""
 function timer() {
-    var timeLeft = 30;
+    var timeLeft = 90;
     let timeInterval = setInterval(function () {
         // function that makes timer change 
-        if (timeLeft >= 0) {
+        if (timeLeft > 0) {
             timeLeft--;
         }
         else if (timeLeft === 0) {
             clearInterval(timeInterval);
             timerEl.textContent = "Out of time"
-            score = 0
+            score = -1
             return score, renderEndScreen()
         }
         if (endScreen.getAttribute("class") === "start") {
@@ -98,7 +127,7 @@ function timer() {
             score = timeLeft
             return score, renderEndScreen()
         }
-timerEl.textContent = timeLeft + " seconds"
+        timerEl.textContent = timeLeft + " seconds"
         // todo: set up penalty for wrong answer
     }, 1000)
     return timeLeft

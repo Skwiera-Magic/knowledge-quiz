@@ -72,7 +72,7 @@ li:nth-child(odd) {
 
 .wrapper {
   margin: 100px auto 0 auto;
-  max-width: 600px;
+  max-width: 800px;
 }
 
 .hide {
