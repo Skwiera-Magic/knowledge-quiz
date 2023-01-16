@@ -90,10 +90,10 @@ function answerChecker(event) {
     let selectedAnswer = event.target.getAttribute("data-index")
     // 
     if (selectedAnswer == correctChoice) {
-        //todo: correctAudio.play();
+        correctAudio.play();
     }
     else {
-        //todo: incorrectAudio.play();
+        incorrectAudio.play();
         timeLeft -= 10
     }
     if (questionNumber == questions.length) {
