@@ -110,12 +110,12 @@ function answerChecker(event) {
 // function that sets up timer after quiz starts
 var timerEl = document.getElementById('time')
 var score = ""
-var timeLeft = 120
+var timeLeft = 120.0
 function timer() {
     let timeInterval = setInterval(function () {
         // function that makes timer change 
         if (timeLeft > 0) {
-            timeLeft--;
+            timeLeft-= 0.1;
         }
         else if (timeLeft === 0) {
             clearInterval(timeInterval);
@@ -128,8 +128,8 @@ function timer() {
             score = timeLeft
             return score, renderEndScreen()
         }
-        timerEl.textContent = timeLeft + " seconds"
-    }, 1000)
+        timerEl.textContent = timeLeft.toFixed(1) + " seconds"
+    }, 100)
     return timeLeft
 }
 
