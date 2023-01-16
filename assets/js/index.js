@@ -125,7 +125,7 @@ function timer() {
         }
         if (endScreen.getAttribute("class") === "start") {
             clearInterval(timeInterval)
-            score = timeLeft
+            score = timeLeft.toFixed(1)
             return score, renderEndScreen()
         }
         timerEl.textContent = timeLeft.toFixed(1) + " seconds"
