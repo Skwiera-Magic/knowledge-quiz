@@ -29,9 +29,9 @@ let questions = [
     },
     {
         question: "If your lightsaber was just chopped in half by industrial blade and there's couple droids running after you, what do you do?",
-        answers: ["Raise your hands and fake surrender, try to mesmerize your enemies", 
-            "Start crying as it was your favourite lightsaber, last gift from your master", 
-            "Use the force to fling one of the droids at rest of them and run away, blend into closes crowd", 
+        answers: ["Raise your hands and fake surrender, try to mesmerize your enemies",
+            "Start crying as it was your favourite lightsaber, last gift from your master",
+            "Use the force to fling one of the droids at rest of them and run away, blend into closes crowd",
             "When looking at pieces of your weapon trip on some rubble, fall down and end up just the same as lightsaber"],
         correctAnswer: 2
     },
@@ -90,10 +90,10 @@ function answerChecker(event) {
     let selectedAnswer = event.target.getAttribute("data-index")
     // 
     if (selectedAnswer == correctChoice) {
-        // todo: correctAudio.play();
+        //todo: correctAudio.play();
     }
     else {
-        // todo: incorrectAudio.play();
+        //todo: incorrectAudio.play();
         penalty();
     }
     if (questionNumber == questions.length) {
@@ -105,6 +105,13 @@ function answerChecker(event) {
     }
     return selectedAnswer, correctChoice
 }
+
+// todo: set up penalty for wrong answer
+// function to remove 10 seconds from timer in case of incorrect answer is chosen
+function penalty() {
+    timeLeft - 10;
+}
+
 // function that sets up timer after quiz starts
 var timerEl = document.getElementById('time')
 var score = ""
@@ -128,23 +135,8 @@ function timer() {
             return score, renderEndScreen()
         }
         timerEl.textContent = timeLeft + " seconds"
-        // todo: set up penalty for wrong answer
     }, 1000)
     return timeLeft
-}
-
-function penalty() {
-    timeLeft--;
-    timeLeft--;
-    timeLeft--;
-    timeLeft--;
-    timeLeft--;
-    timeLeft--;
-    timeLeft--;
-    timeLeft--;
-    timeLeft--;
-    timeLeft--;
-    log("penalty added")
 }
 
 // function that shows time left as final score
@@ -153,17 +145,23 @@ function renderEndScreen() {
     finalScore.textContent = score + 1
 }
 
-// todo: make it work on pressing enter button
 // function to render end screen after submitting the score
 let initials = document.getElementById("initials")
 let submit = document.getElementById("submit")
 let feedback = document.getElementById("feedback")
+var results;
+let highscoreList = []
 submit.addEventListener("click", function () {
     endScreen.setAttribute("class", "hide")
     feedback.setAttribute("class", "start")
     feedback.textContent = "Thank you for taking the quiz, check highscores to know how you placed"
-    localStorage.setItem("initials", initials.value)
-    localStorage.setItem("final-score", score)
+    results = {initials: initials.value, finalScore: score}
+    log(results)
+    highscoreList = JSON.parse(localStorage.getItem("highscore-list")) || []
+    highscoreList.push(results)
+    log(localStorage.getItem("highscore-list"))
+    localStorage.setItem("highscore-list", JSON.stringify(highscoreList))
+    //localStorage.setItem("final-score", score)
 })
 
 initials.addEventListener("keypress", function (event) {
