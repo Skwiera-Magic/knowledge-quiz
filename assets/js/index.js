@@ -94,7 +94,7 @@ function answerChecker(event) {
     }
     else {
         //todo: incorrectAudio.play();
-        penalty();
+        timeLeft -= 10
     }
     if (questionNumber == questions.length) {
         questionsScreen.setAttribute("class", "hide")
@@ -106,18 +106,12 @@ function answerChecker(event) {
     return selectedAnswer, correctChoice
 }
 
-// todo: set up penalty for wrong answer
-// function to remove 10 seconds from timer in case of incorrect answer is chosen
-function penalty() {
-    timeLeft - 10;
-}
 
 // function that sets up timer after quiz starts
 var timerEl = document.getElementById('time')
 var score = ""
-var timeLeft = ""
+var timeLeft = 120
 function timer() {
-    var timeLeft = 90;
     let timeInterval = setInterval(function () {
         // function that makes timer change 
         if (timeLeft > 0) {

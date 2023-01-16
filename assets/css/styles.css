@@ -30,7 +30,7 @@ button:hover {
   background-color: #8570a5;
 }
 
-/* .button {
+.button {
   display: inline-block;
   margin: 5px;
   cursor: pointer;
@@ -45,7 +45,7 @@ button:hover {
 
 .button:hover {
   background-color: #8570a5;
-} */
+}
 
 .choices button {
   display: block;
@@ -66,9 +66,9 @@ li {
   list-style: decimal inside none;
 }
 
-li:nth-child(odd) {
+/* li:nth-child(odd) {
   background-color: #f3edfc;
-}
+} */
 
 .wrapper {
   margin: 100px auto 0 auto;
