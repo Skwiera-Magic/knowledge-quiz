@@ -10,8 +10,8 @@
 
 ### The challenge
 
-* Are you brave neough to try hardest quiz you have ever seen?
-* Will you complete this journey and claim your well-worked-for reward?
+* Are you brave enough to try hardest quiz you have ever seen?
+* Will you complete this journey and claim your well-earned reward?
 * We will know soon!
 ### While adventuring/answering questions you can admire usage of 
 * Event delegations
@@ -26,7 +26,7 @@
 
 ### Links
 
-* You can see deployed quiz here: https://skwiera-magic.github.io/knowledge-quiz
+* You can see deployed quiz [here](https://skwiera-magic.github.io/knowledge-quiz)
 
 ## Author
 - Skwiera-Magic - [My GitHub](https://github.com/Skwiera-Magic/)
